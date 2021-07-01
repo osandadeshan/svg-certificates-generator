@@ -1,6 +1,6 @@
 const {SVGPathData, SVGPathDataTransformer, SVGPathDataEncoder, SVGPathDataParser} = require('svg-pathdata');
 var fs = require('fs');
-const s3 = require('aws-sdk/clients/s3');  //
+// const s3 = require('aws-sdk/clients/s3');  //
 // let data2;
 // fs.readFile('https://certificates-andun.s3.amazonaws.com/svg.svg', 'utf8' , (err, data) => {
 //     if (err) {
@@ -25,50 +25,48 @@ const s3 = require('aws-sdk/clients/s3');  //
 //         console.log('Lyric saved!');
 //     });
 // })
-async function readFile() {
-    try {
-        let s3Data = await readSvgFile();
-        console.log(s3Data);
-    } catch (err) {
-        console.log('Error:', err);
-    }
-}
+// async function readFile() {
+//     try {
+//         let s3Data = await readSvgFile();
+//         console.log(s3Data);
+//     } catch (err) {
+//         console.log('Error:', err);
+//     }
+// }
+//
+// const readSvgFile = () => {
+//     return new Promise(function (resolve, reject) {
+//         var params = { Bucket: "certificates-andun", Key: 'svg.svg' };
+//         s3Bkt.getObject(params, function (err, data) {
+//             if (err) {
+//                 reject(err.message);
+//             } else {
+//                 var data = Buffer.from(data.Body).toString('utf8');
+//                 resolve(data);
+//             }
+//         });
+//     });
+// }
+//
+// const uploadFile = (fileName) => {
+//     // Read content from the file
+//     let fileContent;
+//     readSvgFile().then(data => {
+//         const params = {
+//             Bucket: "certificates-andun",
+//             Key: 'svg2.svg', // File name you want to save as in S3
+//             Body: data
+//         };
 
-const readSvgFile = () => {
-    return new Promise(function (resolve, reject) {
-        var s3Bkt = new s3({ accessKeyId: "AKIAZVNZ5GDWAM364PPF", secretAccessKey: "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" });
-        // var s3Bkt = new s3();
-        var params = { Bucket: "certificates-andun", Key: 'svg.svg' };
-        s3Bkt.getObject(params, function (err, data) {
-            if (err) {
-                reject(err.message);
-            } else {
-                var data = Buffer.from(data.Body).toString('utf8');
-                resolve(data);
-            }
-        });
-    });
-}
-
-const uploadFile = (fileName) => {
-    // Read content from the file
-    let fileContent;
-    readSvgFile().then(data => {
-        const params = {
-            Bucket: "certificates-andun",
-            Key: 'svg2.svg', // File name you want to save as in S3
-            Body: data
-        };
-        let s3Bkt = new s3({ accessKeyId: "AKIAZVNZ5GDWAM364PPF", secretAccessKey: "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" });
-        s3Bkt.upload(params, function(err, data) {
-            if (err) {
-                throw err;
-            }
-            console.log(`File uploaded successfully. ${data.Location}`);
-        });
-    })
-};
-
-uploadFile()
+//         s3Bkt.upload(params, function(err, data) {
+//             if (err) {
+//                 throw err;
+//             }
+//             console.log(`File uploaded successfully. ${data.Location}`);
+//         });
+//     })
+// };
+//
+// uploadFile()
 
 

@@ -1,11 +1,15 @@
 service: svg-certificates-generator
 
+plugins:
+  - serverless-iam-roles-per-function
+
 provider:
   name: aws
   lambdaHashingVersion: 20201221
   runtime: nodejs14.x
   stage: dev
   region: us-east-1
+
 
 functions:
   app:
@@ -14,3 +18,9 @@ functions:
       - http:
           path: /certificate
           method: post
+    iamRoleStatmentsName: ReadSvgBucketPolicy
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "s3: GetObject"
+        Resource: arn:aws:s3:::certificates-andun
